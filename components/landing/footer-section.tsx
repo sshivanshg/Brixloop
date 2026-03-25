@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { SITE_DESCRIPTION } from "@/lib/site";
 import { AnimatedWave } from "./animated-wave";
 
 const footerLinks = {
@@ -57,7 +58,7 @@ export function FooterSection() {
               </a>
 
               <p className="text-muted-foreground leading-relaxed mb-8 max-w-xs">
-                The platform for teams who innovate. Build, deploy, and scale with unprecedented velocity.
+                {SITE_DESCRIPTION}
               </p>
 
               {/* Social Links */}
@@ -104,7 +105,7 @@ export function FooterSection() {
         {/* Bottom Bar */}
         <div className="py-8 border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            2025 Optimus. All rights reserved.
+            2025 BrixLoop. All rights reserved.
           </p>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">

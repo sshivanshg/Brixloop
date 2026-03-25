@@ -1,25 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSphere } from "./animated-sphere";
-
-const words = ["create", "build", "scale", "ship"];
+import { SITE_HERO_HEADLINE, SITE_HERO_SUBLINE } from "@/lib/site";
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % words.length);
-    }, 2500);
-    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -58,7 +50,7 @@ export function HeroSection() {
       {/* Main hero: fills space above stats; centered vertically so stats never overlap */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-center px-6 py-16 pt-28 pb-8 lg:px-12 lg:pt-32 lg:pb-12">
         {/* Eyebrow */}
-        <div 
+        <div
           className={`mb-8 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
@@ -68,70 +60,51 @@ export function HeroSection() {
             Welcome to Brixloop
           </span>
         </div>
-        
+
         {/* Main headline */}
         <div className="mb-12">
-          <h1 
-            className={`text-[clamp(3rem,12vw,10rem)] font-display leading-[0.9] tracking-tight transition-all duration-1000 ${
+          <h1
+            className={`text-[clamp(2.25rem,8vw,6.5rem)] font-display leading-[0.95] tracking-tight transition-all duration-1000 md:text-[clamp(2.5rem,7.5vw,7rem)] ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <span className="block">The future way to</span>
-            <span className="block">
-              {" "}
-              <span className="relative inline-block">
-                <span 
-                  key={wordIndex}
-                  className="inline-flex"
-                >
-                  {words[wordIndex].split("").map((char, i) => (
-                    <span
-                      key={`${wordIndex}-${i}`}
-                      className="inline-block animate-char-in"
-                      style={{
-                        animationDelay: `${i * 50}ms`,
-                      }}
-                    >
-                      {char}
-                    </span>
-                  ))}
-                </span>
-                <span className="absolute -bottom-2 left-0 right-0 h-3 bg-foreground/10" />
-              </span>
-            </span>
+            {SITE_HERO_HEADLINE}
           </h1>
         </div>
-        
+
         {/* Description */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-end">
-          <p 
-            className={`text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-xl transition-all duration-700 delay-200 ${
+        <div className="grid items-end gap-12 lg:grid-cols-2 lg:gap-24">
+          <p
+            className={`max-w-xl text-xl leading-relaxed text-muted-foreground transition-all delay-200 duration-700 lg:text-2xl ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            From strategy to launch—brand, sites, and products your agency
-            can stand behind.
+            {SITE_HERO_SUBLINE}
           </p>
-          
+
           {/* CTAs */}
-          <div 
-            className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-700 delay-300 ${
+          <div
+            className={`flex flex-col items-start gap-4 transition-all delay-300 duration-700 sm:flex-row ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 h-14 text-base rounded-full group"
+            <Button
+              size="lg"
+              className="h-14 rounded-full bg-primary px-8 text-base text-primary-foreground hover:bg-primary/90 group"
+              asChild
             >
-              Start free trial
-              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              <Link href="/services">
+                Start Your Build
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="h-14 px-8 text-base rounded-full border-brand-light-gray/30 hover:bg-brand-orange/10 hover:border-brand-orange/40"
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-14 rounded-full border-brand-light-gray/30 px-8 text-base hover:border-brand-orange/40 hover:bg-brand-orange/10"
+              asChild
             >
-              Watch demo
+              <Link href="/#features">View Technical Capabilities</Link>
             </Button>
           </div>
         </div>
@@ -139,7 +112,7 @@ export function HeroSection() {
 
       {/* Stats marquee — always below hero content (no absolute overlap on desktop) */}
       <div
-        className={`relative z-10 shrink-0 w-full border-t border-foreground/5 py-8 pb-16 lg:py-10 lg:pb-20 transition-all duration-700 delay-500 ${
+        className={`relative z-10 shrink-0 w-full border-t border-foreground/5 py-8 pb-16 transition-all delay-500 duration-700 lg:py-10 lg:pb-20 ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -153,10 +126,10 @@ export function HeroSection() {
                 { value: "6x", label: "faster to ship", company: "NOTION" },
               ].map((stat) => (
                 <div key={`${stat.company}-${i}`} className="flex items-baseline gap-4">
-                  <span className="text-4xl lg:text-5xl font-display">{stat.value}</span>
+                  <span className="text-4xl font-display lg:text-5xl">{stat.value}</span>
                   <span className="text-sm text-muted-foreground">
                     {stat.label}
-                    <span className="block font-mono text-xs mt-1">{stat.company}</span>
+                    <span className="mt-1 block font-mono text-xs">{stat.company}</span>
                   </span>
                 </div>
               ))}
@@ -164,9 +137,6 @@ export function HeroSection() {
           ))}
         </div>
       </div>
-      
-      {/* Scroll indicator */}
-      
     </section>
   );
 }

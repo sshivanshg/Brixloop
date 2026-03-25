@@ -59,13 +59,12 @@ export function SecuritySection() {
               Security
             </span>
             <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-8">
-              Trust is
+              Enterprise-Grade
               <br />
-              non-negotiable.
+              Integrity.
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed mb-12">
-              Enterprise-grade security isn&apos;t optional. It&apos;s built into every layer 
-              of our platform, from infrastructure to application.
+              Security isn&apos;t an add-on; it&apos;s baked into the first line of code.
             </p>
 
             {/* Certifications */}

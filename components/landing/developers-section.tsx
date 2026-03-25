@@ -6,18 +6,18 @@ import { Copy, Check } from "lucide-react";
 const codeExamples = [
   {
     label: "Install",
-    code: `npm install @brixloop/sdk
+    code: `npm install @brixloop/core
 
 # or
-yarn add @brixloop/sdk
-pnpm add @brixloop/sdk`,
+yarn add @brixloop/core
+pnpm add @brixloop/core`,
   },
   {
     label: "Initialize",
-    code: `import { Brixloop } from '@brixloop/sdk'
+    code: `import { brixloop } from '@brixloop/core'
 
-const brixloop = new Brixloop({
-  apiKey: process.env.BRIXLOOP_KEY
+await brixloop.configure({
+  apiKey: process.env.BRIXLOOP_API_KEY
 })`,
   },
   {

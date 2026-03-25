@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { SITE_DESCRIPTION } from '@/lib/site'
 
 const instrumentSans = Instrument_Sans({ 
   subsets: ["latin"],
@@ -22,7 +23,13 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'Brixloop - Build and Ship Faster',
-  description: 'The creative platform for teams who innovate. Build, deploy, and scale with unprecedented velocity.',
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    description: SITE_DESCRIPTION,
+  },
   generator: 'v0.app',
 }
 

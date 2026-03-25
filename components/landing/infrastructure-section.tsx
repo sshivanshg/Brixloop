@@ -55,8 +55,9 @@ export function InfrastructureSection() {
               default.
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed mb-12">
-              Deploy once, run everywhere. Our edge network spans 17 data centers 
-              across 6 continents, delivering sub-50ms latency to 99% of the world.
+              Zero-Latency Foundations. We build global infrastructure that stays ahead of your growth.
+              Our edge footprint spans 17 data centers across 6 continents, delivering sub-50ms latency
+              to 99% of the world.
             </p>
 
             {/* Stats */}

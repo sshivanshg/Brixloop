@@ -5,26 +5,30 @@ import { useEffect, useRef, useState } from "react";
 const features = [
   {
     number: "01",
-    title: "Instant Deployment",
-    description: "Push to production in seconds. Our edge network ensures your applications load instantly, anywhere in the world.",
+    title: "Growth-Aware Architecture",
+    description:
+      "Systems designed around how you actually scale—so performance, cost, and complexity stay aligned as demand compounds.",
     visual: "deploy",
   },
   {
     number: "02",
-    title: "AI-Native Workflows",
-    description: "Build intelligent applications with built-in AI capabilities. From inference to training, everything scales automatically.",
+    title: "Agentic AI Orchestration",
+    description:
+      "Multi-step AI workflows with clear guardrails: routing, tooling, and review paths that stay observable in production.",
     visual: "ai",
   },
   {
     number: "03",
-    title: "Real-time Collaboration",
-    description: "Work together seamlessly. Live preview, instant feedback, and version control that actually makes sense.",
+    title: "DevOps Autopilot",
+    description:
+      "Release pipelines, environments, and observability wired for velocity—less manual toil, fewer surprises when you ship.",
     visual: "collab",
   },
   {
     number: "04",
     title: "Enterprise Security",
-    description: "Bank-grade encryption, SOC 2 compliance, and granular access controls. Your data stays yours.",
+    description:
+      "Encryption, access control, and compliance-minded patterns engineered from the first line of code—not retrofitted under pressure.",
     visual: "security",
   },
 ];

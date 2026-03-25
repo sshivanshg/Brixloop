@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Facebook, Linkedin, Twitter } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -15,189 +14,174 @@ import {
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 
-const inputClassName =
-  "h-11 rounded-none border border-[#3b3b3b] bg-transparent text-sm text-[#f5f5f5] placeholder:text-[#8f8f8f] focus-visible:ring-0 focus-visible:border-[#e85002]"
-
-const selectClassName =
-  "h-11 w-full rounded-none border border-[#3b3b3b] bg-transparent text-sm text-[#f5f5f5] data-[placeholder]:text-[#8f8f8f] focus:ring-0 focus:border-[#e85002]"
-
-type Person = {
-  name: string
-  role: string
-  initials: string
-}
-
-const guests: Person[] = [
-  { name: "Lisa Alvin", role: "Cofounder, Jea", initials: "LA" },
-  { name: "Jenny Pick", role: "Head of Education, Jea", initials: "JP" },
-  { name: "Peter Scott", role: "Founder, Jea", initials: "PS" },
-]
-
-const hosts: Person[] = [{ name: "Josh Jacob", role: "Educator, Web", initials: "JJ" }]
-
-function PersonRow({ person }: { person: Person }) {
-  return (
-    <div className="flex items-center gap-3">
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-full border border-[#e85002]/40 bg-[#1d1d1d] text-[10px] font-semibold tracking-wide text-[#f2c7ad]">
-        {person.initials}
-      </div>
-      <div>
-        <p className="text-[18px] font-medium leading-tight text-[#f5f5f5]">{person.name}</p>
-        <p className="text-[12px] text-[#9a9a9a]">{person.role}</p>
-      </div>
-    </div>
-  )
-}
-
 export function InquiryForm() {
-  const [companySize, setCompanySize] = useState("")
+  const [projectType, setProjectType] = useState("")
+  const [budgetRange, setBudgetRange] = useState("")
+  const [timeline, setTimeline] = useState("")
   const [consent, setConsent] = useState(false)
 
   return (
-    <div className="overflow-hidden border border-[#2a2a2a] bg-[#0a0a0a]">
-      <div className="grid lg:grid-cols-[1fr_300px]">
-        <div className="border-r border-[#2a2a2a] px-6 py-8 md:px-12 md:py-12">
-          <p className="font-mono text-xs text-[#8f8f8f]">March 17, 2021 12:00</p>
-          <h2 className="mt-4 max-w-2xl font-display text-5xl leading-tight text-[#f5f5f5] md:text-6xl">
-            The help of Augmented Reality and Holograms.
+    <div className="overflow-hidden rounded-xl border border-border bg-card/40 backdrop-blur-sm">
+      <div className="grid lg:grid-cols-[1fr_min(100%,320px)]">
+        <div className="border-b border-border px-6 py-8 md:px-10 md:py-10 lg:border-b-0 lg:border-r">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Engagement</p>
+          <h2 className="mt-3 max-w-2xl font-display text-3xl tracking-tight text-foreground md:text-4xl lg:text-5xl">
+            Scope your next build
           </h2>
-          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-[#b0b0b0]">
-            Use Augmented Reality to keep students engaged and provide detailed explanations of models
-            and course material. In a 3D, AR Lab, students can pinch, zoom, and rotate equipment
-            related to the course, for a fully immersive learning experience.
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Point us at <strong className="font-medium text-foreground">the Brix</strong> (infrastructure you
+            need), <strong className="font-medium text-foreground">autonomous intelligence</strong> (AI in your
+            stack), or <strong className="font-medium text-foreground">the Loop</strong> (growth and acquisition
+            mechanics). Add constraints and success criteria—we&apos;ll reply with a technical read and next
+            steps.
           </p>
 
-          <h3 className="mt-14 font-display text-4xl text-[#f5f5f5]">Join the event</h3>
+          <h3 className="mt-10 font-display text-xl text-foreground md:text-2xl">Technical brief</h3>
 
           <form
-            className="mt-8 space-y-5"
+            className="mt-6 space-y-5"
             onSubmit={(event) => {
               event.preventDefault()
             }}
           >
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="firstName" className="text-xs font-normal text-[#9a9a9a]">
-                  First name
-                </Label>
-                <Input id="firstName" name="firstName" placeholder="Enter your first name" className={inputClassName} />
+                <Label htmlFor="inq-firstName">First name</Label>
+                <Input id="inq-firstName" name="firstName" autoComplete="given-name" placeholder="Alex" required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="lastName" className="text-xs font-normal text-[#9a9a9a]">
-                  Last name
-                </Label>
-                <Input id="lastName" name="lastName" placeholder="Enter your last name" className={inputClassName} />
+                <Label htmlFor="inq-lastName">Last name</Label>
+                <Input id="inq-lastName" name="lastName" autoComplete="family-name" placeholder="Rivera" required />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="businessEmail" className="text-xs font-normal text-[#9a9a9a]">
-                  Business email
-                </Label>
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inq-email">Work email</Label>
                 <Input
-                  id="businessEmail"
-                  name="businessEmail"
+                  id="inq-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
+                  placeholder="you@company.com"
                   required
-                  placeholder="Enter your email"
-                  className={inputClassName}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="title" className="text-xs font-normal text-[#9a9a9a]">
-                  Title
-                </Label>
-                <Input id="title" name="title" placeholder="What is your job title?" className={inputClassName} />
+                <Label htmlFor="inq-company">Company</Label>
+                <Input id="inq-company" name="company" autoComplete="organization" placeholder="Company or studio" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="companyName" className="text-xs font-normal text-[#9a9a9a]">
-                  Company name
-                </Label>
-                <Input id="companyName" name="companyName" placeholder="Where do you work?" className={inputClassName} />
+                <Label htmlFor="inq-title">Role</Label>
+                <Input id="inq-title" name="title" autoComplete="organization-title" placeholder="e.g. CTO, Head of Product" />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="companySize" className="text-xs font-normal text-[#9a9a9a]">
-                  Company size
-                </Label>
-                <Select value={companySize} onValueChange={setCompanySize}>
-                  <SelectTrigger id="companySize" className={selectClassName}>
-                    <SelectValue placeholder="Select" />
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inq-projectType">Primary focus</Label>
+                <Select value={projectType} onValueChange={setProjectType}>
+                  <SelectTrigger id="inq-projectType" name="projectType">
+                    <SelectValue placeholder="Where should we lean first?" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1-10">1 - 10</SelectItem>
-                    <SelectItem value="11-50">11 - 50</SelectItem>
-                    <SelectItem value="51-200">51 - 200</SelectItem>
-                    <SelectItem value="201-500">201 - 500</SelectItem>
-                    <SelectItem value="500+">500+</SelectItem>
+                    <SelectItem value="modular-infrastructure">
+                      Modular infrastructure (The Brix)
+                    </SelectItem>
+                    <SelectItem value="autonomous-intelligence">Autonomous intelligence</SelectItem>
+                    <SelectItem value="growth-engineering">Growth engineering (The Loop)</SelectItem>
+                    <SelectItem value="multiple">Multiple lanes / not sure yet</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inq-budget">Budget range</Label>
+                <Select value={budgetRange} onValueChange={setBudgetRange}>
+                  <SelectTrigger id="inq-budget" name="budgetRange">
+                    <SelectValue placeholder="Optional" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="under-25k">Under $25k</SelectItem>
+                    <SelectItem value="25-75k">$25k – $75k</SelectItem>
+                    <SelectItem value="75-150k">$75k – $150k</SelectItem>
+                    <SelectItem value="150k-plus">$150k+</SelectItem>
+                    <SelectItem value="unsure">Not sure yet</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inq-timeline">Target timeline</Label>
+                <Select value={timeline} onValueChange={setTimeline}>
+                  <SelectTrigger id="inq-timeline" name="timeline">
+                    <SelectValue placeholder="When do you need to ship?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="asap">ASAP / already started</SelectItem>
+                    <SelectItem value="1-3mo">1 – 3 months</SelectItem>
+                    <SelectItem value="3-6mo">3 – 6 months</SelectItem>
+                    <SelectItem value="exploring">Exploring / no fixed date</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="learningGoal" className="text-xs font-normal text-[#9a9a9a]">
-                What are you hoping to learn about?
-              </Label>
+              <Label htmlFor="inq-brief">Technical brief</Label>
               <Textarea
-                id="learningGoal"
-                name="learningGoal"
-                placeholder="Where do you work?"
-                className="min-h-20 rounded-none border border-[#3b3b3b] bg-transparent text-sm text-[#f5f5f5] placeholder:text-[#8f8f8f] focus-visible:ring-0 focus-visible:border-[#e85002]"
+                id="inq-brief"
+                name="brief"
+                className="min-h-32 resize-y"
+                placeholder="Current stack, integrations, traffic or scale targets, compliance needs, links to repos or docs, and your definition of done."
+                required
               />
             </div>
 
-            <div className="flex items-center gap-3 pt-1">
+            <div className="space-y-2">
+              <Label htmlFor="inq-referral">How did you hear about us?</Label>
+              <Input
+                id="inq-referral"
+                name="referral"
+                placeholder="Referral, search, partner intro, etc. (optional)"
+              />
+            </div>
+
+            <div className="flex items-start gap-3 pt-1">
               <Checkbox
-                id="consent"
+                id="inq-consent"
                 checked={consent}
                 onCheckedChange={(checked) => setConsent(Boolean(checked))}
-                className="size-4 rounded-none border-[#686868] bg-transparent data-[state=checked]:bg-[#e85002] data-[state=checked]:text-white"
               />
-              <Label htmlFor="consent" className="text-sm font-normal text-[#bcbcbc]">
-                I would like to receive emails about future webinars
+              <Label htmlFor="inq-consent" className="text-sm font-normal leading-snug text-muted-foreground">
+                I agree to be contacted about this inquiry and understand my information will be used only to
+                scope and follow up on the project.
               </Label>
             </div>
 
-            <Button
-              type="submit"
-              className="mt-5 h-14 rounded-none border border-[#e85002] bg-[#e85002] px-8 text-base font-semibold text-white hover:bg-[#cf4700]"
-            >
-              Register for this event
+            <Button type="submit" size="lg" className="mt-2 rounded-full px-8">
+              Send technical inquiry
             </Button>
           </form>
         </div>
 
-        <aside className="space-y-10 bg-[#111111] px-6 py-10 md:px-7">
+        <aside className="space-y-8 bg-muted/30 px-6 py-8 md:px-8 md:py-10">
           <div>
-            <p className="text-sm text-[#bbbbbb]">Share</p>
-            <div className="mt-3 flex items-center gap-3">
-              <button type="button" className="text-[#8f8f8f] hover:text-[#e85002]" aria-label="Share on Facebook">
-                <Facebook className="size-3.5" />
-              </button>
-              <button type="button" className="text-[#8f8f8f] hover:text-[#e85002]" aria-label="Share on Twitter">
-                <Twitter className="size-3.5" />
-              </button>
-              <button type="button" className="text-[#8f8f8f] hover:text-[#e85002]" aria-label="Share on LinkedIn">
-                <Linkedin className="size-3.5" />
-              </button>
-            </div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-muted-foreground">What happens next</p>
+            <ol className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground">
+              <li className="flex gap-3">
+                <span className="font-mono text-xs text-primary">01</span>
+                <span>We review your brief and confirm fit—usually within one to two business days.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-mono text-xs text-primary">02</span>
+                <span>Short intro call to align on scope, stakeholders, and constraints.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="font-mono text-xs text-primary">03</span>
+                <span>You receive a tailored proposal: approach, timeline, and investment.</span>
+              </li>
+            </ol>
           </div>
-
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.38em] text-[#a7a7a7]">GUESTS</p>
-            <div className="mt-4 space-y-4">
-              {guests.map((guest) => (
-                <PersonRow key={guest.name} person={guest} />
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.38em] text-[#a7a7a7]">HOSTED BY</p>
-            <div className="mt-4 space-y-4">
-              {hosts.map((host) => (
-                <PersonRow key={host.name} person={host} />
-              ))}
-            </div>
-          </div>
+          <p className="border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
+            Prefer email? Reach the team at{" "}
+            <a href="mailto:hello@brixloop.com" className="text-foreground underline-offset-4 hover:underline">
+              hello@brixloop.com
+            </a>
+            .
+          </p>
         </aside>
       </div>
     </div>
