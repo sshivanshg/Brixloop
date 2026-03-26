@@ -6,11 +6,7 @@ import { Copy, Check } from "lucide-react";
 const codeExamples = [
   {
     label: "Install",
-    code: `npm install @brixloop/core
-
-# or
-yarn add @brixloop/core
-pnpm add @brixloop/core`,
+    code: `pnpm add @brixloop/core`,
   },
   {
     label: "Initialize",
