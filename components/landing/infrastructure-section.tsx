@@ -47,7 +47,7 @@ export function InfrastructureSection() {
           >
             <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
-              Infrastructure
+              Serving
             </span>
             <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-8">
               Global by
@@ -55,7 +55,7 @@ export function InfrastructureSection() {
               default.
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed mb-12">
-              Zero-Latency Foundations. We build global infrastructure that stays ahead of your growth.
+              Zero hastle. We build global infrastructure that stays ahead of your growth.
               Our edge footprint spans 17 data centers across 6 continents, delivering sub-50ms latency
               to 99% of the world.
             </p>

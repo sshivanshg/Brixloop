@@ -5,12 +5,12 @@ import { useEffect, useRef, useState } from "react";
 const steps = [
   {
     number: "I",
-    title: "Connect your tools",
-    description: "Integrate with your existing stack in minutes. We support 200+ data sources out of the box.",
+    title: "Connect with you",
+    description: "Understanding with your scope and goals and aligning with you vision.",
     code: `import { brixloop } from '@brixloop/core'
 
 brixloop.connect({
-  source: 'your-database',
+  source: 'your-vision',
   sync: true
 })`,
   },
