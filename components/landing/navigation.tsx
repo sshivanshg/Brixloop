@@ -10,7 +10,6 @@ const navLinks = [
   { name: "Services", href: "/services" },
   { name: "Blogs", href: "/blogs" },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Team", href: "/team" },
 ];
 
 export function Navigation() {
@@ -83,7 +82,7 @@ export function Navigation() {
               size="sm"
               className={`bg-primary hover:bg-primary/90 text-primary-foreground rounded-full transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
             >
-              <Link href="/services">Get started</Link>
+              <Link href="/services#inquiry-form">Get started</Link>
             </Button>
           </div>
 
@@ -145,7 +144,7 @@ export function Navigation() {
               className="w-full bg-primary text-primary-foreground rounded-full h-14 text-base hover:bg-primary/90"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <Link href="/services">Get started</Link>
+              <Link href="/services#inquiry-form">Get started</Link>
             </Button>
           </div>
         </div>

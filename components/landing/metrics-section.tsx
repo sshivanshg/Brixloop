@@ -2,72 +2,89 @@
 
 import { useEffect, useState, useRef } from "react";
 
-function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
-  const [count, setCount] = useState(0);
+function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number | string; suffix?: string; prefix?: string }) {
+  // Support string "end" for non-numeric metrics (e.g., "6 Weeks")
+  const [count, setCount] = useState(typeof end === "number" ? 0 : end);
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let start = 0;
-          const duration = 2000;
-          const startTime = performance.now();
+    if (typeof end === "number") {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            const duration = 2000;
+            const startTime = performance.now();
 
-          const animate = (currentTime: number) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(eased * end));
+            const animate = (currentTime: number) => {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              setCount(Math.floor(eased * end));
 
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            }
-          };
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              }
+            };
 
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.5 }
-    );
+            requestAnimationFrame(animate);
+          }
+        },
+        { threshold: 0.5 }
+      );
 
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+      if (ref.current) observer.observe(ref.current);
+      return () => observer.disconnect();
+    } else {
+      setCount(end);
+    }
   }, [end, hasAnimated]);
 
   return (
     <div ref={ref} className="text-6xl lg:text-8xl font-display tracking-tight">
-      {prefix}{count.toLocaleString()}{suffix}
+      {typeof end === "number" ? (
+        <>
+          {prefix}
+          {Number(count).toLocaleString()}
+          {suffix}
+        </>
+      ) : (
+        end
+      )}
     </div>
   );
 }
 
 const metrics = [
-  { 
-    value: 2847392, 
-    suffix: "", 
+  {
+    value: "100%",
+    suffix: "",
     prefix: "",
-    label: "API requests today",
+    label: "Technical Integrity",
+    message:
+      "We build production-grade foundations that eliminate technical debt from day one.",
   },
-  { 
-    value: 99, 
-    suffix: ".99%", 
+  {
+    value: "6 Weeks",
+    suffix: "",
     prefix: "",
-    label: "Uptime this quarter",
+    label: "Avg. Launch Velocity",
+    message: "Bridging the gap from initial concept to a high-performance market launch.",
   },
-  { 
-    value: 23, 
-    suffix: "ms", 
-    prefix: "",
-    label: "Average response time",
+  {
+    value: 30,
+    suffix: "%",
+    prefix: "~",
+    label: "Avg. Conversion Lift",
+    message: 'The "Loop" effect: how much your tech helps their growth.',
   },
-  { 
-    value: 184, 
-    suffix: "", 
+  {
+    value: 4,
+    suffix: "+ 24/7",
     prefix: "",
-    label: "Countries served",
+    label: "Partner Alignment",
+    message: "You work across your 4 global timezones to support growth.",
   },
 ];
 
@@ -79,7 +96,7 @@ export function MetricsSection() {
   useEffect(() => {
     // Initialize with current time on client only
     setTime(new Date().toLocaleTimeString());
-    
+
     const interval = setInterval(() => {
       setTime(new Date().toLocaleTimeString());
     }, 1000);
@@ -106,16 +123,16 @@ export function MetricsSection() {
           <div>
             <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
-              Live metrics
+              Strategic impact
             </span>
             <h2
               className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Performance you
+              Metrics that
               <br />
-              can measure.
+              drive your business.
             </h2>
           </div>
           <div className="flex items-center gap-4 font-mono text-sm text-muted-foreground">
@@ -127,7 +144,7 @@ export function MetricsSection() {
             <span>{time || "00:00:00"}</span>
           </div>
         </div>
-        
+
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-foreground/10">
           {metrics.map((metric, index) => (
@@ -138,12 +155,13 @@ export function MetricsSection() {
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <AnimatedCounter 
-                end={typeof metric.value === 'number' ? metric.value : 0} 
-                suffix={metric.suffix} 
+              <AnimatedCounter
+                end={metric.value}
+                suffix={metric.suffix}
                 prefix={metric.prefix}
               />
-              <div className="mt-4 text-lg text-muted-foreground">{metric.label}</div>
+              <div className="mt-4 text-lg text-foreground">{metric.label}</div>
+              <div className="mt-2 text-sm text-muted-foreground">{metric.message}</div>
             </div>
           ))}
         </div>

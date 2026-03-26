@@ -1,13 +1,20 @@
 /**
  * Add or edit entries here to show work on /portfolio.
- * Optional `imageSrc` is a path under `public/` (e.g. `/images/project.jpg`).
+ *
+ * Preview options (pick what fits each project):
+ * - `embedUrl` — live page in an iframe (blocked by many sites via X-Frame-Options / CSP).
+ * - `imageSrc` — screenshot path under `public/` or an HTTPS image URL (reliable).
+ * - Open Graph: fetch `og:image` server-side in a Route Handler if you need rich cards without iframe.
  */
 export type Project = {
   id: string
   title: string
   summary: string
   tags: string[]
-  /** Path under public/, e.g. `/portfolio/my-cover.jpg` */
+  featured?: boolean
+  /** HTTPS URL to embed in the browser mockup (may be blank if the site forbids framing). */
+  embedUrl?: string
+  /** Path under public/ or remote image URL — screenshot / OG-style preview. */
   imageSrc?: string
   liveHref?: string
   repoHref?: string
@@ -16,31 +23,37 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "example-ship-dashboard",
-    title: "Ship dashboard",
+    id: "tiny-tales-videos",
+    title: "Tiny Tales Videos",
     summary:
-      "Internal analytics and release tracking for product teams. Replace this copy with your real project description.",
-    tags: ["Next.js", "Product", "Design system"],
-    year: "2025",
+      "An AI-powered video generator for children. We engineered the core generative engine and a viral loop architecture that handles high-traffic rendering at scale.",
+    tags: ["AI Engineering", "Next.js", "MLOps", "Global Scale"],
+    year: "2026 / Global",
+    featured: true,
+    embedUrl: "https://tinytalesvideos.com",
+    imageSrc:
+      "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftinytalesvideos.com?w=1600",
+    liveHref: "https://tinytalesvideos.com",
+    repoHref: "https://tinytalesvideos.com",
+  },
+  {
+    id: "example-growth-dashboard",
+    title: "Growth command center",
+    summary:
+      "Real-time campaign intelligence platform with multi-channel attribution and operator-first automation dashboards.",
+    tags: ["Product Analytics", "Automation", "Realtime"],
+    year: "2025 / North America",
     liveHref: "#",
     repoHref: "#",
   },
   {
-    id: "example-api-platform",
-    title: "API platform",
+    id: "example-conversion-lab",
+    title: "Conversion lab",
     summary:
-      "Developer-facing docs and playground for a REST API. Swap in your stack, links, and imagery.",
-    tags: ["TypeScript", "API", "Docs"],
-    year: "2024",
+      "Experimentation workspace for high-performing landing pages, audience segments, and rapid hypothesis validation.",
+    tags: ["CRO", "Experimentation", "Design Ops"],
+    year: "2024 / Remote",
     liveHref: "#",
-  },
-  {
-    id: "example-brand-site",
-    title: "Marketing site",
-    summary:
-      "Landing experience with motion and content blocks. Add `imageSrc` when you have a cover image in `public/`.",
-    tags: ["Web", "Brand", "Motion"],
-    year: "2024",
     repoHref: "#",
   },
 ]

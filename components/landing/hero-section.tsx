@@ -7,6 +7,14 @@ import { ArrowRight } from "lucide-react";
 import { AnimatedSphere } from "./animated-sphere";
 import { SITE_HERO_HEADLINE, SITE_HERO_SUBLINE } from "@/lib/site";
 
+const heroMetrics = [
+  { value: "100+", label: "clients served" },
+  { value: "100%", label: "delivery success" },
+  { value: "24/7", label: "partner alignment" },
+  { value: "6 Weeks", label: "avg. launch velocity" },
+  { value: "~30%", label: "avg. conversion lift" },
+];
+
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -93,7 +101,7 @@ export function HeroSection() {
               className="h-14 rounded-full bg-primary px-8 text-base text-primary-foreground hover:bg-primary/90 group"
               asChild
             >
-              <Link href="/services">
+              <Link href="/services#inquiry-form">
                 Start Your Build
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
@@ -119,18 +127,10 @@ export function HeroSection() {
         <div className="marquee flex gap-16 whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex gap-16">
-              {[
-                { value: "20 days", label: "saved on builds", company: "NETFLIX" },
-                { value: "98%", label: "faster deployment", company: "STRIPE" },
-                { value: "300%", label: "throughput increase", company: "LINEAR" },
-                { value: "6x", label: "faster to ship", company: "NOTION" },
-              ].map((stat) => (
-                <div key={`${stat.company}-${i}`} className="flex items-baseline gap-4">
+              {heroMetrics.map((stat) => (
+                <div key={`${stat.value}-${i}`} className="flex items-baseline gap-4">
                   <span className="text-4xl font-display lg:text-5xl">{stat.value}</span>
-                  <span className="text-sm text-muted-foreground">
-                    {stat.label}
-                    <span className="mt-1 block font-mono text-xs">{stat.company}</span>
-                  </span>
+                  <span className="text-sm text-muted-foreground">{stat.label}</span>
                 </div>
               ))}
             </div>

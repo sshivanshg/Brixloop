@@ -11,7 +11,7 @@ export function PortfolioHero() {
         <h1 className="max-w-3xl font-display text-4xl tracking-tight text-foreground md:text-5xl lg:text-6xl">
           Portfolio
         </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
+        {/* <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
           Case studies and shipped products. Extend the list in{" "}
           <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground/90">
             lib/projects.ts
@@ -21,7 +21,7 @@ export function PortfolioHero() {
             public/
           </code>
           .
-        </p>
+        </p> */}
       </div>
     </section>
   )

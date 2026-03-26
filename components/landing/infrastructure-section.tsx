@@ -2,18 +2,32 @@
 
 import { useEffect, useState, useRef } from "react";
 
-const locations = [
-  { city: "San Francisco", region: "US West", latency: "12ms" },
-  { city: "New York", region: "US East", latency: "18ms" },
-  { city: "London", region: "Europe", latency: "24ms" },
-  { city: "Tokyo", region: "Asia Pacific", latency: "32ms" },
-  { city: "Sydney", region: "Oceania", latency: "45ms" },
-  { city: "Sao Paulo", region: "South America", latency: "38ms" },
+const deliveryHubs = [
+  {
+    name: "United States",
+    description: "Strategic Engineering",
+    status: "Shipped",
+  },
+  {
+    name: "Dubai, UAE",
+    description: "Enterprise Innovation",
+    status: "Deployed",
+  },
+  {
+    name: "New Zealand",
+    description: "Performance Foundations",
+    status: "Shipped",
+  },
+  {
+    name: "India",
+    description: "Scale & Optimization",
+    status: "Deployed",
+  },
 ];
 
 export function InfrastructureSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeLocation, setActiveLocation] = useState(0);
+  const [activeHub, setActiveHub] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -30,8 +44,8 @@ export function InfrastructureSection() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveLocation((prev) => (prev + 1) % locations.length);
-    }, 2000);
+      setActiveHub((prev: number) => (prev + 1) % deliveryHubs.length);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -47,37 +61,35 @@ export function InfrastructureSection() {
           >
             <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
-              Serving
+              Global Reach
             </span>
             <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-8">
-              Global by
+              Global Trust.
               <br />
-              default.
+              Proven Scale.
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed mb-12">
-              Zero hastle. We build global infrastructure that stays ahead of your growth.
-              Our edge footprint spans 17 data centers across 6 continents, delivering sub-50ms latency
-              to 99% of the world.
+              We don’t just build for local markets; we engineer for the world. With successful deployments across the US, UAE, NZ, and India, BrixLoop turns ambitious ideas into market-dominant products. Your growth has no borders—and neither does our expertise.
             </p>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8">
               <div>
-                <div className="text-4xl lg:text-5xl font-display mb-2">17</div>
-                <div className="text-sm text-muted-foreground">Data centers</div>
+                <div className="text-4xl lg:text-5xl font-display mb-2">100+</div>
+                <div className="text-sm text-muted-foreground">Clients Served</div>
               </div>
               <div>
-                <div className="text-4xl lg:text-5xl font-display mb-2">99.99%</div>
-                <div className="text-sm text-muted-foreground">Uptime SLA</div>
+                <div className="text-4xl lg:text-5xl font-display mb-2">100%</div>
+                <div className="text-sm text-muted-foreground">Delivery Success</div>
               </div>
               <div>
-                <div className="text-4xl lg:text-5xl font-display mb-2">&lt;50ms</div>
-                <div className="text-sm text-muted-foreground">Global latency</div>
+                <div className="text-4xl lg:text-5xl font-display mb-2">24/7</div>
+                <div className="text-sm text-muted-foreground">Partner Alignment</div>
               </div>
             </div>
           </div>
 
-          {/* Right: Location list */}
+          {/* Right: Global Delivery Hubs List */}
           <div
             className={`transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
@@ -86,34 +98,34 @@ export function InfrastructureSection() {
             <div className="border border-foreground/10">
               {/* Header */}
               <div className="px-6 py-4 border-b border-foreground/10 flex items-center justify-between">
-                <span className="text-sm font-mono text-muted-foreground">Edge Network</span>
+                <span className="text-sm font-mono text-muted-foreground">Global Delivery Hubs</span>
                 <span className="flex items-center gap-2 text-xs font-mono text-green-600">
                   <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  All operational
+                  Active Partnerships
                 </span>
               </div>
 
-              {/* Locations */}
+              {/* Delivery Hubs List */}
               <div>
-                {locations.map((location, index) => (
+                {deliveryHubs.map((hub, index) => (
                   <div
-                    key={location.city}
-                    className={`px-6 py-5 border-b border-foreground/5 last:border-b-0 flex items-center justify-between transition-all duration-300 ${
-                      activeLocation === index ? "bg-foreground/[0.02]" : ""
+                    key={hub.name}
+                    className={`px-6 py-5 border-b border-foreground/5 last:border-b-0 flex flex-col transition-all duration-300 ${
+                      activeHub === index ? "bg-foreground/[0.02]" : ""
                     }`}
                   >
-                    <div className="flex items-center gap-4">
-                      <span 
+                    <div className="flex items-center gap-4 mb-2">
+                      <span
                         className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                          activeLocation === index ? "bg-foreground" : "bg-foreground/20"
+                          activeHub === index ? "bg-foreground" : "bg-foreground/20"
                         }`}
                       />
                       <div>
-                        <div className="font-medium">{location.city}</div>
-                        <div className="text-sm text-muted-foreground">{location.region}</div>
+                        <div className="font-medium">{hub.name}</div>
+                        <div className="text-sm text-muted-foreground">{hub.description}</div>
                       </div>
                     </div>
-                    <span className="font-mono text-sm text-muted-foreground">{location.latency}</span>
+                    <span className="font-mono text-sm text-muted-foreground">{hub.status}</span>
                   </div>
                 ))}
               </div>

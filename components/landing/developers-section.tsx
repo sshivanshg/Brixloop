@@ -37,20 +37,20 @@ console.log('Live at:', app.url)`,
 
 const features = [
   { 
-    title: "TypeScript native", 
-    description: "Full type safety with auto-generated types."
+    title: "Rapid Scaffolding", 
+    description: "Go from idea to a production-ready environment in hours, not weeks."
   },
   { 
-    title: "Zero config", 
-    description: "Sensible defaults that just work."
+    title: "Security by Design", 
+    description: "Enterprise-grade security protocols are baked into every layer we build."
   },
   { 
-    title: "Edge-ready", 
-    description: "Runs anywhere: Node, Deno, Bun, browsers."
+    title: "AI-Native Integration", 
+    description: "We specialize in weaving agentic AI into existing business workflows."
   },
   { 
-    title: "12KB gzipped", 
-    description: "Lightweight with zero dependencies."
+    title: "Continuous Evolution", 
+    description: "Our code is designed to be modular, making future updates easy and affordable."
   },
 ];
 
@@ -122,13 +122,11 @@ export function DevelopersSection() {
               For developers
             </span>
             <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-8">
-              Built by devs.
+              Velocity Without Compromise.
               <br />
-              <span className="text-muted-foreground">For devs.</span>
+              <span className="text-muted-foreground">Building faster by building smarter.</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-              A thoughtfully designed SDK that gets out of your way. 
-              Ship faster with intuitive APIs and exceptional documentation.
             </p>
             
             {/* Features */}

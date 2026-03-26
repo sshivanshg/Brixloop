@@ -50,10 +50,10 @@ export function IntegrationsSection() {
           <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-6">
             Works with everything
             <br />
-            you already use.
+            you already know.
           </h2>
           <p className="text-xl text-muted-foreground">
-            200+ pre-built integrations. Connect your entire stack in minutes.
+            200+ industry standard technologies.
           </p>
         </div>
 

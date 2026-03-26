@@ -19,6 +19,9 @@ export function InquiryForm() {
   const [budgetRange, setBudgetRange] = useState("")
   const [timeline, setTimeline] = useState("")
   const [consent, setConsent] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [statusMessage, setStatusMessage] = useState<string | null>(null)
+  const [statusType, setStatusType] = useState<"success" | "error" | null>(null)
 
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-card/40 backdrop-blur-sm">
@@ -40,8 +43,76 @@ export function InquiryForm() {
 
           <form
             className="mt-6 space-y-5"
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault()
+              setStatusMessage(null)
+              setStatusType(null)
+
+              if (!consent) {
+                setStatusType("error")
+                setStatusMessage("Please confirm consent so we can contact you about your inquiry.")
+                return
+              }
+
+              const form = event.currentTarget
+              const formData = new FormData(form)
+              const payload = {
+                firstName: String(formData.get("firstName") || ""),
+                lastName: String(formData.get("lastName") || ""),
+                email: String(formData.get("email") || ""),
+                company: String(formData.get("company") || ""),
+                title: String(formData.get("title") || ""),
+                projectType,
+                budgetRange,
+                timeline,
+                brief: String(formData.get("brief") || ""),
+                referral: String(formData.get("referral") || ""),
+                consent,
+              }
+
+              const missingRequiredField =
+                !payload.firstName.trim() ||
+                !payload.lastName.trim() ||
+                !payload.email.trim() ||
+                !payload.company.trim() ||
+                !payload.title.trim() ||
+                !payload.projectType.trim() ||
+                !payload.budgetRange.trim() ||
+                !payload.timeline.trim() ||
+                !payload.brief.trim() ||
+                !payload.referral.trim()
+
+              if (missingRequiredField) {
+                setStatusType("error")
+                setStatusMessage("Please complete all fields before submitting your inquiry.")
+                return
+              }
+
+              try {
+                setIsSubmitting(true)
+                const response = await fetch("/api/inquiry", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload),
+                })
+
+                if (!response.ok) {
+                  throw new Error("Unable to send inquiry")
+                }
+
+                setStatusType("success")
+                setStatusMessage("Inquiry sent. We will reach out to your email shortly.")
+                form.reset()
+                setProjectType("")
+                setBudgetRange("")
+                setTimeline("")
+                setConsent(false)
+              } catch {
+                setStatusType("error")
+                setStatusMessage("Could not send your inquiry right now. Please try again or email hello@brixloop.com.")
+              } finally {
+                setIsSubmitting(false)
+              }
             }}
           >
             <div className="grid gap-4 md:grid-cols-2">
@@ -66,11 +137,23 @@ export function InquiryForm() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="inq-company">Company</Label>
-                <Input id="inq-company" name="company" autoComplete="organization" placeholder="Company or studio" />
+                <Input
+                  id="inq-company"
+                  name="company"
+                  autoComplete="organization"
+                  placeholder="Company or studio"
+                  required
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="inq-title">Role</Label>
-                <Input id="inq-title" name="title" autoComplete="organization-title" placeholder="e.g. CTO, Head of Product" />
+                <Input
+                  id="inq-title"
+                  name="title"
+                  autoComplete="organization-title"
+                  placeholder="e.g. CTO, Head of Product"
+                  required
+                />
               </div>
               <div className="space-y-2 md:col-span-2">
                 <Label htmlFor="inq-projectType">Primary focus</Label>
@@ -92,7 +175,7 @@ export function InquiryForm() {
                 <Label htmlFor="inq-budget">Budget range</Label>
                 <Select value={budgetRange} onValueChange={setBudgetRange}>
                   <SelectTrigger id="inq-budget" name="budgetRange">
-                    <SelectValue placeholder="Optional" />
+                    <SelectValue placeholder="Select a budget range" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="under-25k">Under $25k</SelectItem>
@@ -135,7 +218,8 @@ export function InquiryForm() {
               <Input
                 id="inq-referral"
                 name="referral"
-                placeholder="Referral, search, partner intro, etc. (optional)"
+                placeholder="Referral, search, partner intro, etc."
+                required
               />
             </div>
 
@@ -151,9 +235,20 @@ export function InquiryForm() {
               </Label>
             </div>
 
-            <Button type="submit" size="lg" className="mt-2 rounded-full px-8">
-              Send technical inquiry
+            <Button type="submit" size="lg" className="mt-2 rounded-full px-8" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Send technical inquiry"}
             </Button>
+            {statusMessage ? (
+              <p
+                className={
+                  statusType === "error"
+                    ? "text-sm text-red-400"
+                    : "text-sm text-emerald-400"
+                }
+              >
+                {statusMessage}
+              </p>
+            ) : null}
           </form>
         </div>
 
