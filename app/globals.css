@@ -246,4 +246,17 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  @keyframes cta-shimmer {
+    0% {
+      transform: translateX(-100%) skewX(-16deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-16deg);
+    }
+  }
+
+  .cta-shimmer-highlight {
+    animation: cta-shimmer 2.6s ease-in-out infinite;
+  }
 }

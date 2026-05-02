@@ -31,14 +31,6 @@ export default function BlogsPage() {
           </p>
         </div>
       </section>
-      <div className="relative z-10 mx-auto flex max-w-[1400px] justify-center px-6 py-16 lg:px-12">
-        <Button variant="outline" className="rounded-full" asChild>
-          <Link href="/">
-            <ArrowLeft className="mr-2 size-4" />
-            Back to home
-          </Link>
-        </Button>
-      </div>
       <FooterSection />
     </main>
   )

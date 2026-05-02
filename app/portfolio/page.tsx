@@ -20,14 +20,6 @@ export default function PortfolioPage() {
       <PortfolioHero />
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-16 lg:px-12">
         <ProjectGrid />
-        <div className="mt-16 flex justify-center border-t border-foreground/10 pt-12">
-          <Button variant="outline" className="rounded-full" asChild>
-            <Link href="/">
-              <ArrowLeft className="mr-2 size-4" />
-              Back to home
-            </Link>
-          </Button>
-        </div>
       </div>
       <FooterSection />
     </main>

@@ -95,15 +95,6 @@ export default function ServicesPage() {
       <section id="inquiry-form" className="relative z-10 mx-auto max-w-[1400px] px-6 py-14 lg:px-12 lg:py-16">
         <InquiryForm />
       </section>
-
-      <div className="relative z-10 mx-auto flex max-w-[1400px] justify-center px-6 pb-16 lg:px-12">
-        <Button variant="outline" className="rounded-full" asChild>
-          <Link href="/">
-            <ArrowLeft className="mr-2 size-4" />
-            Back to home
-          </Link>
-        </Button>
-      </div>
       <FooterSection />
     </main>
   )
